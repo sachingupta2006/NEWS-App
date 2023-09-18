@@ -108,8 +108,10 @@ class NewsDetails extends StatelessWidget {
                     ],
                   ),
                   20.height,
-                  textBlack25w600(
-                      '${articlesAPIController.searchResults[index].title}'),
+                  textRedUnderline(
+                      '${articlesAPIController.searchResults[index].title}',
+                      articlesAPIController.tecController.text.toLowerCase(),
+                      detailsPage: true),
                   15.height,
                   textBlack16(
                       '${articlesAPIController.searchResults[index].content}'),

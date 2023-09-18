@@ -71,3 +71,35 @@ Widget textBlack14Bold(String text) {
         color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
   );
 }
+
+Widget textRedUnderline(String text, String searchKey,
+    {bool detailsPage = false}) {
+  List<String> words = text.split(' ');
+  List<InlineSpan> textSpans = [];
+  List<String> searchWords =
+      searchKey.split(' ').map((e) => e.toLowerCase()).toList();
+
+  for (var word in words) {
+    bool shouldUnderline = searchWords.contains(word.toLowerCase());
+
+    textSpans.add(
+      TextSpan(
+        text: word,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: detailsPage ? 25.sp : 15.sp,
+          fontWeight: FontWeight.w600,
+          decoration:
+              shouldUnderline ? TextDecoration.underline : TextDecoration.none,
+          decorationColor: Colors.red,
+        ),
+      ),
+    );
+    if (word != words.last) {
+      textSpans.add(const TextSpan(text: ' '));
+    }
+  }
+  return RichText(
+    text: TextSpan(children: textSpans),
+  );
+}

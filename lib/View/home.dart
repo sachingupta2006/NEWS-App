@@ -126,29 +126,35 @@ class _HomeState extends State<Home> {
                       child: SizedBox(
                         height: 500.h,
                         child: ListView.builder(
-                          itemCount:
-                              articlesAPIController.searchResults.isNotEmpty
-                                  ? articlesAPIController.searchResults.length
-                                  : articlesAPIController.articlesList!.length,
-                          itemBuilder: (context, index) => articlesAPIController
-                                  .searchResults.isNotEmpty
-                              ? contentWidget(
-                                  index,
-                                  articlesAPIController
-                                      .searchResults[index].title!,
-                                  articlesAPIController
-                                      .publishedSearchDates[index],
-                                  articlesAPIController
-                                      .suffixSearchSubtitle[index],
-                                  articlesAPIController
-                                      .searchResults[index].urlToImage!)
-                              : contentWidget(
-                                  index,
-                                  '${articlesAPIController.articlesList![index].title}',
-                                  '${articlesAPIController.publishedDates[index]}',
-                                  articlesAPIController.suffixSubtitle[index],
-                                  '${articlesAPIController.articlesList![index].urlToImage}'),
-                        ),
+                            itemCount: articlesAPIController
+                                    .searchResults.isNotEmpty
+                                ? articlesAPIController.searchResults.length
+                                : articlesAPIController.articlesList!.length,
+                            itemBuilder: (context, index) {
+                              return articlesAPIController
+                                      .searchResults.isNotEmpty
+                                  ? contentWidget(
+                                      index,
+                                      textRedUnderline(
+                                          articlesAPIController
+                                              .searchResults[index].title!,
+                                          articlesAPIController
+                                              .tecController.text.toLowerCase()),
+                                      articlesAPIController
+                                          .publishedSearchDates[index],
+                                      articlesAPIController
+                                          .suffixSearchSubtitle[index],
+                                      articlesAPIController
+                                          .searchResults[index].urlToImage!)
+                                  : contentWidget(
+                                      index,
+                                      textBlack15w600(
+                                          '${articlesAPIController.articlesList![index].title}'),
+                                      '${articlesAPIController.publishedDates[index]}',
+                                      articlesAPIController
+                                          .suffixSubtitle[index],
+                                      '${articlesAPIController.articlesList![index].urlToImage}');
+                            }),
                       ),
                     )
                   ],
@@ -158,7 +164,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget contentWidget(int index, String title, String publishedAt,
+  Widget contentWidget(int index, Widget title, String publishedAt,
       String suffixSubtitle, String image) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -170,7 +176,7 @@ class _HomeState extends State<Home> {
           child: ListTile(
             leading: Image.network(image,
                 fit: BoxFit.fill, height: 90.h, width: 90.h),
-            title: textBlack15w600(title),
+            title: title,
             subtitle: textGrey10w600('$publishedAt • $suffixSubtitle'),
           ),
         ),
