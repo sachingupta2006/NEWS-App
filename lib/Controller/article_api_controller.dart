@@ -42,6 +42,7 @@ class ArticlesAPIController extends GetxController {
         if (_articlesApi?.articles != null) {
           _articlesList = _articlesApi!.articles;
           _articlesList!.removeWhere((article) => article.title == '[Removed]');
+          _articlesList!.removeWhere((article) => article.urlToImage == null);
 
           _publishedDates = _articlesList!.map((e) {
             return formatDate(e.publishedAt ?? '');

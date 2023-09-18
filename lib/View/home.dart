@@ -139,7 +139,8 @@ class _HomeState extends State<Home> {
                                           articlesAPIController
                                               .searchResults[index].title!,
                                           articlesAPIController
-                                              .tecController.text.toLowerCase()),
+                                              .tecController.text
+                                              .toLowerCase()),
                                       articlesAPIController
                                           .publishedSearchDates[index],
                                       articlesAPIController
