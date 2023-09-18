@@ -10,7 +10,7 @@ class ArticlesAPIController extends GetxController {
   bool get isLoading => _isLoading;
 
   ArticlesAPI? _articlesApi;
-  ArticlesAPI? get articlesApi => _articlesApi;
+  // ArticlesAPI? get articlesApi => _articlesApi;
 
   List<Articles>? _articlesList;
   List<Articles>? get articlesList => _articlesList;
@@ -41,6 +41,7 @@ class ArticlesAPIController extends GetxController {
 
         if (_articlesApi?.articles != null) {
           _articlesList = _articlesApi!.articles;
+          _articlesList!.removeWhere((article) => article.title == '[Removed]');
 
           _publishedDates = _articlesList!.map((e) {
             return formatDate(e.publishedAt ?? '');
